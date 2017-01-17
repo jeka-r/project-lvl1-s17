@@ -1,0 +1,31 @@
+{
+  "name": "project-lvl1-s17",
+  "version": "0.0.1",
+  "description": "Brain-games-project-Hexlet",
+  "main": "brain-games.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "babel-node": "babel-node",
+    "build": "NODE_ENV=production babel src --out-dir dist --source-maps inline",
+    "prepublish": "npm run build"
+  },
+  "author": "jeka-r",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jeka-r/project-lvl1-s17.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jeka-r/project-lvl1-s17/issues"
+  },
+  "homepage": "https://github.com/jeka-r/project-lvl1-s17#readme",
+  "devDependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-core": "^6.21.0",
+    "babel-preset-env": "^1.1.8",
+    "babel-preset-stage-0": "^6.16.0"
+  },
+  "bin": {
+  "brain-games": "dist/bin/brain-games.js"
+  }
+}
