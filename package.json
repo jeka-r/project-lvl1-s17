@@ -1,6 +1,6 @@
 {
   "name": "project-lvl1-s17",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Brain-games-project-Hexlet",
   "main": "brain-games.js",
   "scripts": {
@@ -31,7 +31,8 @@
     "eslint-plugin-import": "^2.2.0"
   },
   "bin": {
-    "brain-games": "dist/bin/brain-games.js"
+    "brain-games": "dist/bin/brain-games.js",
+    "brain-even": "dist/bin/brain-even.js"
   },
   "dependencies": {
     "readline-sync": "^1.4.5"
