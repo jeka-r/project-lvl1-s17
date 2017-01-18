@@ -26,6 +26,9 @@
     "babel-preset-stage-0": "^6.16.0"
   },
   "bin": {
-  "brain-games": "dist/bin/brain-games.js"
+    "brain-games": "dist/bin/brain-games.js"
+  },
+  "dependencies": {
+    "readline-sync": "^1.4.5"
   }
 }
