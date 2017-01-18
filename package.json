@@ -1,11 +1,12 @@
 {
   "name": "project-lvl1-s17",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "Brain-games-project-Hexlet",
   "main": "brain-games.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "babel-node": "babel-node",
+    "eslint": "eslint",
     "build": "NODE_ENV=production babel src --out-dir dist --source-maps inline",
     "prepublish": "npm run build"
   },
@@ -22,8 +23,12 @@
   "devDependencies": {
     "babel-cli": "^6.18.0",
     "babel-core": "^6.21.0",
+    "babel-eslint": "^7.1.1",
     "babel-preset-env": "^1.1.8",
-    "babel-preset-stage-0": "^6.16.0"
+    "babel-preset-stage-0": "^6.16.0",
+    "eslint": "^3.13.1",
+    "eslint-config-airbnb-base": "^11.0.1",
+    "eslint-plugin-import": "^2.2.0"
   },
   "bin": {
     "brain-games": "dist/bin/brain-games.js"
