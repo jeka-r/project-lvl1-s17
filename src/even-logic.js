@@ -1,19 +1,23 @@
 import readlineSync from 'readline-sync';
 
 function getRandom(min, max) {
-  return (Math.random() * (max - min)) + min;
+  return Math.round((Math.random() * (max - min)) + min);
 }
 
 function isEven(num) {
   return num % 2 === 0;
 }
 
-function asker() {
+function getAnswer() {
   const result = readlineSync.question('Your answer: ');
   if (result === 'yes' || result === 'no') {
     return result;
   }
-  return asker();
+  return getAnswer();
+}
+
+function checkAnswer(str, num) {
+  return (str === 'yes' && isEven(num) === true) || (str === 'no' && isEven(num) === false);
 }
 
 export default () => {
@@ -26,12 +30,12 @@ export default () => {
     if (acc >= 4) {
       return `Congratulations, ${actual}!`;
     }
-    const number = Math.round(getRandom(1, 20));
+    const number = getRandom(1, 20);
 
     console.log('Question:', number);
-    const answer = asker();
+    const answer = getAnswer();
 
-    if ((answer === 'yes' && isEven(number) === true) || (answer === 'no' && isEven(number) === false)) {
+    if (checkAnswer(answer, number) === true) {
       console.log('Correct!');
       const newAcc = acc + 1;
       return iter(newAcc);
@@ -39,5 +43,5 @@ export default () => {
 
     return `Let's try again, ${actual}!`;
   };
-  return iter(1, 0);
+  return iter(1);
 };
