@@ -1,13 +1,19 @@
 #!/usr/bin/node
 import readlineSync from 'readline-sync';
 
-function getRandomArbitrary(min, max) {
-  return (Math.random() * (max - min)) + min;
+function getRandomArbitrary(min, max, previusValue) {
+  const number = (Math.random() * (max - min)) + min;
+  if (number === previusValue) {
+    return getRandomArbitrary(min, max, previusValue);
+  }
+  return number;
 }
 
 function checkOdd(num) {
-  const result = num % 2 === 0 ? 'odd' : 'even';
-  return result;
+  if (num % 2 === 0) {
+    return true;
+  }
+  return false;
 }
 
 function asker() {
@@ -27,16 +33,12 @@ const iter = (acc, previusValue) => {
   if (acc >= 4) {
     return `Congratulations, ${actual}!`;
   }
-  const number = Math.round(getRandomArbitrary(1, 20));
-
-  if (number === previusValue) {
-    return iter(acc, previusValue);
-  }
+  const number = Math.round(getRandomArbitrary(1, 20, previusValue));
 
   console.log('Question:', number);
   const answer = asker();
 
-  if ((answer === 'yes' && checkOdd(number) === 'odd') || (answer === 'no' && checkOdd(number) === 'even')) {
+  if ((answer === 'yes' && checkOdd(number) === true) || (answer === 'no' && checkOdd(number) === false)) {
     console.log('Correct!');
     const newAcc = acc + 1;
     const newPreviusValue = number;
