@@ -17,7 +17,10 @@ function getAnswer() {
 }
 
 function checkAnswer(str, num) {
-  return (str === 'yes' && isEven(num) === true) || (str === 'no' && isEven(num) === false);
+  if (str === 'yes') {
+    return isEven(num) === true;
+  }
+  return isEven(num) === false;
 }
 
 export default () => {
