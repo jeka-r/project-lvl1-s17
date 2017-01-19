@@ -74,3 +74,23 @@ export const calcValue = (data) => {
   }
   return number1 / number2;
 };
+
+export const defGcdValue = () => {
+  const number1 = getRandom(1, 100);
+  const number2 = getRandom(1, 100);
+  const numbers = pairs.cons(number1, number2);
+  return numbers;
+};
+
+export const calcGcdValue = (data) => {
+  const number1 = pairs.car(data);
+  const number2 = pairs.cdr(data);
+  if (number2 - number1 === 0) {
+    return number1;
+  }
+
+  if (number1 > number2) {
+    return calcGcdValue(pairs.cons(number2, number1 - number2));
+  }
+  return calcGcdValue(pairs.cons(number1, number2 - number1));
+};
