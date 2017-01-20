@@ -31,8 +31,6 @@ export default () => {
 
   const defCheck = (answer, value) => {
     const calculatedValue = +calcBalanceValue(value);
-    console.log('answer = ', typeof answer);
-    console.log('calculatedValue = ', typeof calculatedValue);
     return calculatedValue === answer;
   };
 
