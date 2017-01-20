@@ -9,3 +9,11 @@ export const askNumberAnswer = () => {
   }
   return result;
 };
+
+export const askYesNoAnswer = () => {
+  const result = readlineSync.question('Your answer: ');
+  if (result === 'yes' || result === 'no') {
+    return result;
+  }
+  return askYesNoAnswer();
+};

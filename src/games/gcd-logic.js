@@ -1,44 +1,27 @@
-import { cons, car, cdr } from 'hexlet-pairs';
-import { getRandom, askNumberAnswer } from '../utils';
+import { cons } from 'hexlet-pairs';
+import { getRandom } from '../utils';
 import gamesProcess from '../general-logic';
 
-function getGcdValue() {
-  const number1 = getRandom(1, 100);
-  const number2 = getRandom(1, 100);
-  const numbers = cons(number1, number2);
-  return numbers;
-}
-
-function calcGcdValue(data) {
-  const number1 = car(data);
-  const number2 = cdr(data);
+function calcGcdValue(number1, number2) {
   if (number2 - number1 === 0) {
     return number1;
   }
 
   if (number1 > number2) {
-    return calcGcdValue(cons(number2, number1 - number2));
+    return calcGcdValue(number2, number1 - number2);
   }
-  return calcGcdValue(cons(number1, number2 - number1));
+  return calcGcdValue(number1, number2 - number1);
 }
 
 export default () => {
-  const gameDescription = 'Find the greatest common divisor of given numbers.';
+  const description = 'Find the greatest common divisor of given numbers.';
 
-  const getValue = () => getGcdValue();
-
-  const getQuestion = (value) => {
-    const number1 = car(value);
-    const number2 = cdr(value);
-    return `${number1} ${number2}`;
-  };
-
-  const askAnswer = () => askNumberAnswer();
-
-  const check = (answer, value) => {
-    const calculatedValue = calcGcdValue(value);
-    return calculatedValue === answer;
-  };
-
-  console.log(gamesProcess(gameDescription, getValue, getQuestion, askAnswer, check));
+  function generation() {
+    const number1 = getRandom(1, 100);
+    const number2 = getRandom(1, 100);
+    const question = `${number1} ${number2}`;
+    const calculatedValue = calcGcdValue(number1, number2);
+    return cons(calculatedValue, question);
+  }
+  console.log(gamesProcess(description, generation));
 };

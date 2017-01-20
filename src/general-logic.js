@@ -1,8 +1,10 @@
 import readlineSync from 'readline-sync';
+import { car, cdr } from 'hexlet-pairs';
+import { askNumberAnswer, askYesNoAnswer } from './utils';
 
-export default (gameDescription, getValue, getQuestion, askAnswer, check) => {
+export default (description, generation) => {
   console.log('Welcome to the Brain Games!');
-  console.log(gameDescription);
+  console.log(description);
   const gamerName = readlineSync.question('May I have your name?: ');
   console.log(`Hello, ${gamerName}!`);
 
@@ -10,17 +12,17 @@ export default (gameDescription, getValue, getQuestion, askAnswer, check) => {
     if (acc >= 4) {
       return `Congratulations, ${gamerName}!`;
     }
-    const value = getValue();
+    const pair = generation();
+    const question = cdr(pair);
+    const result = car(pair);
+    console.log(`Question: ${question}`);
 
-    console.log(`Question: ${getQuestion(value)}`);
+    const answer = typeof result === 'string' ? askYesNoAnswer() : askNumberAnswer();
 
-    const answer = askAnswer();
-
-    if (check(answer, value)) {
+    if (result === answer) {
       console.log('Correct!');
       return iter(acc + 1);
     }
-
     return `Let's try again, ${gamerName}!`;
   };
   return iter(1);

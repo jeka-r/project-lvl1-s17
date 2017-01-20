@@ -1,4 +1,5 @@
-import { getRandom, askNumberAnswer } from '../utils';
+import { cons } from 'hexlet-pairs';
+import { getRandom } from '../utils';
 import gamesProcess from '../general-logic';
 
 function calcBalanceValue(num) {
@@ -13,23 +14,20 @@ function calcBalanceValue(num) {
   minValue += 1;
   arraiedNum.push(minValue, maxValue);
   arraiedNum.sort();
-  const result = arraiedNum.join('');
+  const result = +arraiedNum.join('');
   return calcBalanceValue(result);
 }
 
 export default () => {
-  const gameDescription = 'Balance the given number.';
+  const description = 'Balance the given number.';
 
-  const getValue = () => getRandom(1, 5000);
+  function generation() {
+    const value = getRandom(1, 5000);
+    const question = value;
+    const calculatedValue = calcBalanceValue(value);
+    const pair = cons(calculatedValue, question);
+    return pair;
+  }
 
-  const getQuestion = value => value;
-
-  const askAnswer = () => askNumberAnswer();
-
-  const check = (answer, value) => {
-    const calculatedValue = +calcBalanceValue(value);
-    return calculatedValue === answer;
-  };
-
-  console.log(gamesProcess(gameDescription, getValue, getQuestion, askAnswer, check));
+  console.log(gamesProcess(description, generation));
 };

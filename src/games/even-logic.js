@@ -1,36 +1,27 @@
-import readlineSync from 'readline-sync';
+import { cons } from 'hexlet-pairs';
 import { getRandom } from '../utils';
 import gamesProcess from '../general-logic';
 
-function isEven(num) {
-  return num % 2 === 0;
-}
-
-function askYesNoAnswer() {
-  const result = readlineSync.question('Your answer: ');
-  if (result === 'yes' || result === 'no') {
-    return result;
+function isOdd(num) {
+  if (num % 2 === 0) {
+    return 'yes';
   }
-  return askYesNoAnswer();
-}
-
-function checkYesNoAnswer(str, num) {
-  if (str === 'yes') {
-    return isEven(num);
-  }
-  return !isEven(num);
+  return 'no';
 }
 
 export default () => {
-  const gameDescription = 'Answer "yes" if number odd otherwise answer "no".';
+  const description = 'Answer "yes" if number odd otherwise answer "no".';
 
-  const getValue = () => getRandom(1, 20);
+  function generation() {
+    const value = getRandom(1, 20);
 
-  const getQuestion = number => number;
+    const question = value;
 
-  const askAnswer = () => askYesNoAnswer();
+    const result = isOdd(value);
 
-  const check = (answer, value) => checkYesNoAnswer(answer, value);
+    const pair = cons(result, question);
 
-  console.log(gamesProcess(gameDescription, getValue, getQuestion, askAnswer, check));
+    return pair;
+  }
+  console.log(gamesProcess(description, generation));
 };
