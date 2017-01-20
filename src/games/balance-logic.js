@@ -4,13 +4,11 @@ import gamesProcess from '../general-logic';
 function calcBalanceValue(num) {
   const arraiedNum = num.toString().split('');
   arraiedNum.sort();
-  let minValue = arraiedNum.shift();
-  let maxValue = arraiedNum.pop();
-
+  let minValue = +arraiedNum.shift();
+  let maxValue = +arraiedNum.pop();
   if (maxValue - minValue <= 1) {
     return num;
   }
-
   maxValue -= 1;
   minValue += 1;
   arraiedNum.push(minValue, maxValue);
@@ -32,7 +30,9 @@ export default () => {
   };
 
   const defCheck = (answer, value) => {
-    const calculatedValue = calcBalanceValue(value);
+    const calculatedValue = +calcBalanceValue(value);
+    console.log('answer = ', typeof answer);
+    console.log('calculatedValue = ', typeof calculatedValue);
     return calculatedValue === answer;
   };
 
