@@ -1,4 +1,4 @@
-import { getRandom, askNumberAnswer, makeGreeting } from '../utils';
+import { getRandom, askNumberAnswer } from '../utils';
 import gamesProcess from '../general-logic';
 
 function calcBalanceValue(num) {
@@ -20,19 +20,16 @@ function calcBalanceValue(num) {
 export default () => {
   const gameDescription = 'Balance the given number.';
 
-  const gamerActualName = makeGreeting(gameDescription);
+  const getValue = () => getRandom(1, 5000);
 
-  const defCurrentValue = () => getRandom(1, 5000);
+  const getQuestion = value => value;
 
-  const defQuestionAnswer = (value) => {
-    console.log(`Question: ${value}`);
-    return askNumberAnswer();
-  };
+  const askAnswer = () => askNumberAnswer();
 
-  const defCheck = (answer, value) => {
+  const check = (answer, value) => {
     const calculatedValue = +calcBalanceValue(value);
     return calculatedValue === answer;
   };
 
-  console.log(gamesProcess(gamerActualName, defCurrentValue, defQuestionAnswer, defCheck));
+  console.log(gamesProcess(gameDescription, getValue, getQuestion, askAnswer, check));
 };

@@ -1,8 +1,8 @@
 import { cons, car, cdr } from 'hexlet-pairs';
-import { getRandom, askNumberAnswer, makeGreeting } from '../utils';
+import { getRandom, askNumberAnswer } from '../utils';
 import gamesProcess from '../general-logic';
 
-function defGcdValue() {
+function getGcdValue() {
   const number1 = getRandom(1, 100);
   const number2 = getRandom(1, 100);
   const numbers = cons(number1, number2);
@@ -25,21 +25,20 @@ function calcGcdValue(data) {
 export default () => {
   const gameDescription = 'Find the greatest common divisor of given numbers.';
 
-  const gamerActualName = makeGreeting(gameDescription);
+  const getValue = () => getGcdValue();
 
-  const defCurrentValue = () => defGcdValue();
-
-  const defQuestionAnswer = (value) => {
+  const getQuestion = (value) => {
     const number1 = car(value);
     const number2 = cdr(value);
-    console.log(`Question: ${number1} ${number2}`);
-    return askNumberAnswer();
+    return `${number1} ${number2}`;
   };
 
-  const defCheck = (answer, value) => {
+  const askAnswer = () => askNumberAnswer();
+
+  const check = (answer, value) => {
     const calculatedValue = calcGcdValue(value);
     return calculatedValue === answer;
   };
 
-  console.log(gamesProcess(gamerActualName, defCurrentValue, defQuestionAnswer, defCheck));
+  console.log(gamesProcess(gameDescription, getValue, getQuestion, askAnswer, check));
 };

@@ -1,19 +1,27 @@
+import readlineSync from 'readline-sync';
 
-export default (gamerActualName, defCurrentValue, defQuestionAnswer, defCheck) => {
-  const iter = (gamerName, defValue, questionAnswer, check, acc) => {
+export default (gameDescription, getValue, getQuestion, askAnswer, check) => {
+  console.log('Welcome to the Brain Games!');
+  console.log(gameDescription);
+  const gamerName = readlineSync.question('May I have your name?: ');
+  console.log(`Hello, ${gamerName}!`);
+
+  const iter = (acc) => {
     if (acc >= 4) {
       return `Congratulations, ${gamerName}!`;
     }
-    const value = defValue();
+    const value = getValue();
 
-    const answer = questionAnswer(value);
+    console.log(`Question: ${getQuestion(value)}`);
+
+    const answer = askAnswer();
 
     if (check(answer, value)) {
       console.log('Correct!');
-      return iter(gamerName, defValue, questionAnswer, check, acc + 1);
+      return iter(acc + 1);
     }
 
     return `Let's try again, ${gamerName}!`;
   };
-  return iter(gamerActualName, defCurrentValue, defQuestionAnswer, defCheck, 1);
+  return iter(1);
 };

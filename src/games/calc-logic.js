@@ -1,5 +1,5 @@
 import { cons, car, cdr } from 'hexlet-pairs';
-import { getRandom, askNumberAnswer, makeGreeting } from '../utils';
+import { getRandom, askNumberAnswer } from '../utils';
 import gamesProcess from '../general-logic';
 
 function chooseMathOperator() {
@@ -16,13 +16,13 @@ function chooseMathOperator() {
   return '/';
 }
 
-function defCalcValue() {
+function getCalcValue() {
   const number1 = getRandom(1, 20);
   const number2 = getRandom(1, 20);
   const operator = chooseMathOperator();
 
   if (operator === '/' && number1 % number2 !== 0) {
-    return defCalcValue();
+    return getCalcValue();
   }
   const numbers = cons(number1, number2);
   const result = cons(operator, numbers);
@@ -48,22 +48,21 @@ function calcValue(data) {
 export default () => {
   const gameDescription = 'What is the result of the expression?';
 
-  const gamerActualName = makeGreeting(gameDescription);
+  const getValue = () => getCalcValue();
 
-  const defCurrentValue = () => defCalcValue();
-
-  const defQuestionAnswer = (value) => {
+  const getQuestion = (value) => {
     const number1 = car(cdr(value));
     const number2 = cdr(cdr(value));
     const operator = car(value);
-    console.log(`Question: ${number1} ${operator} ${number2}`);
-    return askNumberAnswer();
+    return `${number1} ${operator} ${number2}`;
   };
 
-  const defCheck = (answer, value) => {
+  const askAnswer = () => askNumberAnswer();
+
+  const check = (answer, value) => {
     const calculatedValue = calcValue(value);
     return calculatedValue === answer;
   };
 
-  console.log(gamesProcess(gamerActualName, defCurrentValue, defQuestionAnswer, defCheck));
+  console.log(gamesProcess(gameDescription, getValue, getQuestion, askAnswer, check));
 };

@@ -1,6 +1,10 @@
 import readlineSync from 'readline-sync';
-import { getRandom, makeGreeting } from '../utils';
+import { getRandom } from '../utils';
 import gamesProcess from '../general-logic';
+
+function isEven(num) {
+  return num % 2 === 0;
+}
 
 function askYesNoAnswer() {
   const result = readlineSync.question('Your answer: ');
@@ -12,24 +16,21 @@ function askYesNoAnswer() {
 
 function checkYesNoAnswer(str, num) {
   if (str === 'yes') {
-    return num % 2 === 0;
+    return isEven(num);
   }
-  return !num % 2 === 0;
+  return !isEven(num);
 }
 
 export default () => {
   const gameDescription = 'Answer "yes" if number odd otherwise answer "no".';
 
-  const gamerActualName = makeGreeting(gameDescription);
+  const getValue = () => getRandom(1, 20);
 
-  const defCurrentValue = () => getRandom(1, 20);
+  const getQuestion = number => number;
 
-  const defQuestionAnswer = (number) => {
-    console.log('Question:', number);
-    return askYesNoAnswer();
-  };
+  const askAnswer = () => askYesNoAnswer();
 
-  const defCheck = (answer, value) => checkYesNoAnswer(answer, value);
+  const check = (answer, value) => checkYesNoAnswer(answer, value);
 
-  console.log(gamesProcess(gamerActualName, defCurrentValue, defQuestionAnswer, defCheck));
+  console.log(gamesProcess(gameDescription, getValue, getQuestion, askAnswer, check));
 };
