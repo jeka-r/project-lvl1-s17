@@ -1,31 +1,26 @@
-import readlineSync from 'readline-sync';
 import { car, cdr } from 'hexlet-pairs';
-import { defCalcValue, askNumberAnswer, calcValue } from '../functions';
+import { defCalcValue, askNumberAnswer, calcValue, makeGreeting } from '../functions';
+import gamesProcess from '../general-logic';
 
 export default () => {
-  console.log('Welcome to the Brain Games!');
-  console.log('What is the result of the expression?');
-  const actual = readlineSync.question('May I have your name?: ');
-  console.log(`Hello, ${actual}!`);
+  const gameDescription = 'What is the result of the expression?';
 
-  const iter = (acc) => {
-    if (acc >= 4) {
-      return `Congratulations, ${actual}!`;
-    }
-    const currentValue = defCalcValue();
-    const number1 = car(cdr(currentValue));
-    const number2 = cdr(cdr(currentValue));
-    const action = car(currentValue);
+  const gamerActualName = makeGreeting(gameDescription);
 
-    console.log(`Question: ${number1} ${action} ${number2}`);
-    const answer = askNumberAnswer();
-    const calculatedValue = calcValue(currentValue);
+  const defCurrentValue = () => defCalcValue();
 
-    if (calculatedValue === answer) {
-      console.log('Correct!');
-      return iter(acc + 1);
-    }
-    return `Let's try again, ${actual}!`;
+  const defQuestionAnswer = (value) => {
+    const number1 = car(cdr(value));
+    const number2 = cdr(cdr(value));
+    const operator = car(value);
+    console.log(`Question: ${number1} ${operator} ${number2}`);
+    return askNumberAnswer();
   };
-  console.log(iter(1));
+
+  const defCheck = (answer, value) => {
+    const calculatedValue = calcValue(value);
+    return calculatedValue === answer;
+  };
+
+  console.log(gamesProcess(gamerActualName, defCurrentValue, defQuestionAnswer, defCheck));
 };

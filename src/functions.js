@@ -1,6 +1,14 @@
 import readlineSync from 'readline-sync';
 import { cons, car, cdr } from 'hexlet-pairs';
 
+export const makeGreeting = (description) => {
+  console.log('Welcome to the Brain Games!');
+  console.log(description);
+  const actual = readlineSync.question('May I have your name?: ');
+  console.log(`Hello, ${actual}!`);
+  return actual;
+};
+
 export const getRandom = (min, max) => Math.round((Math.random() * (max - min)) + min);
 
 export const isEven = num => num % 2 === 0;
@@ -20,7 +28,7 @@ export const checkYesNoAnswer = (str, num) => {
   return !isEven(num);
 };
 
-export const defineMathOperator = () => {
+export const chooseMathOperator = () => {
   const number = getRandom(1, 4);
   if (number === 1) {
     return '+';
@@ -37,14 +45,14 @@ export const defineMathOperator = () => {
 export const defCalcValue = () => {
   const number1 = getRandom(1, 20);
   const number2 = getRandom(1, 20);
-  const defAction = defineMathOperator();
+  const operator = chooseMathOperator();
 
-  if (defAction === '/' && number1 % number2 !== 0) {
+  if (operator === '/' && number1 % number2 !== 0) {
     return defCalcValue();
   }
 
   const numbers = cons(number1, number2);
-  const result = cons(defAction, numbers);
+  const result = cons(operator, numbers);
   return result;
 };
 
@@ -59,14 +67,14 @@ export const askNumberAnswer = () => {
 export const calcValue = (data) => {
   const number1 = car(cdr(data));
   const number2 = cdr(cdr(data));
-  const action = car(data);
-  if (action === '+') {
+  const operator = car(data);
+  if (operator === '+') {
     return number1 + number2;
   }
-  if (action === '-') {
+  if (operator === '-') {
     return number1 - number2;
   }
-  if (action === '*') {
+  if (operator === '*') {
     return number1 * number2;
   }
   return number1 / number2;

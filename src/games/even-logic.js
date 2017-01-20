@@ -1,28 +1,19 @@
-import readlineSync from 'readline-sync';
-import { getRandom, askYesNoAnswer, checkYesNoAnswer } from '../functions';
+import { getRandom, askYesNoAnswer, checkYesNoAnswer, makeGreeting } from '../functions';
+import gamesProcess from '../general-logic';
 
 export default () => {
-  console.log('Welcome to the Brain Games!');
-  console.log('Answer "yes" if number odd otherwise answer "no".');
-  const actual = readlineSync.question('May I have your name?: ');
-  console.log(`Hello, ${actual}!`);
+  const gameDescription = 'Answer "yes" if number odd otherwise answer "no".';
 
-  const iter = (acc) => {
-    if (acc >= 4) {
-      return `Congratulations, ${actual}!`;
-    }
-    const number = getRandom(1, 20);
+  const gamerActualName = makeGreeting(gameDescription);
 
+  const defCurrentValue = () => getRandom(1, 20);
+
+  const defQuestionAnswer = (number) => {
     console.log('Question:', number);
-    const answer = askYesNoAnswer();
-
-    if (checkYesNoAnswer(answer, number)) {
-      console.log('Correct!');
-      return iter(acc + 1);
-    }
-
-    return `Let's try again, ${actual}!`;
+    return askYesNoAnswer();
   };
-  console.log(iter(1));
-//  return null;
+
+  const defCheck = (answer, value) => checkYesNoAnswer(answer, value);
+
+  console.log(gamesProcess(gamerActualName, defCurrentValue, defQuestionAnswer, defCheck));
 };
