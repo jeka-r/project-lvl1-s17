@@ -1,5 +1,4 @@
 #!/usr/bin/node
-import game from '../calc-logic';
+import game from '../games/calc-logic';
 
-const result = game();
-console.log(result);
+game();

@@ -1,6 +1,6 @@
 {
   "name": "project-lvl1-s17",
-  "version": "0.6.0",
+  "version": "0.41.0",
   "description": "Brain-games-project-Hexlet",
   "main": "brain-games.js",
   "scripts": {
@@ -12,23 +12,20 @@
   },
   "author": "jeka-r",
   "license": "ISC",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/jeka-r/project-lvl1-s17.git"
-  },
+  "repository": "git+https://github.com/jeka-r/project-lvl1-s17.git",
   "bugs": {
     "url": "https://github.com/jeka-r/project-lvl1-s17/issues"
   },
   "homepage": "https://github.com/jeka-r/project-lvl1-s17#readme",
   "devDependencies": {
-    "babel-cli": "^6.18.0",
-    "babel-core": "^6.21.0",
-    "babel-eslint": "^7.1.1",
-    "babel-preset-env": "^1.1.8",
-    "babel-preset-stage-0": "^6.16.0",
-    "eslint": "^3.13.1",
-    "eslint-config-airbnb-base": "^11.0.1",
-    "eslint-plugin-import": "^2.2.0"
+    "babel-cli": "*",
+    "babel-core": "*",
+    "babel-eslint": "*",
+    "babel-preset-env": "*",
+    "babel-preset-stage-0": "*",
+    "eslint": "*",
+    "eslint-config-airbnb-base": "*",
+    "eslint-plugin-import": "*"
   },
   "bin": {
     "brain-games": "dist/bin/brain-games.js",
@@ -37,7 +34,7 @@
     "brain-gcd": "dist/bin/brain-gcd.js"
   },
   "dependencies": {
-    "readline-sync": "^1.4.5",
-    "hexlet-pairs": "^0.1.4"
+    "hexlet-pairs": "^0.1.4",
+    "readline-sync": "^1.4.5"
   }
 }

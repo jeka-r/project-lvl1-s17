@@ -1,5 +1,5 @@
 import readlineSync from 'readline-sync';
-import * as funcs from './functions';
+import { getRandom, askYesNoAnswer, checkYesNoAnswer } from '../functions';
 
 export default () => {
   console.log('Welcome to the Brain Games!');
@@ -11,18 +11,18 @@ export default () => {
     if (acc >= 4) {
       return `Congratulations, ${actual}!`;
     }
-    const number = funcs.getRandom(1, 20);
+    const number = getRandom(1, 20);
 
     console.log('Question:', number);
-    const answer = funcs.getYesNoAnswer();
+    const answer = askYesNoAnswer();
 
-    if (funcs.checkYesNoAnswer(answer, number) === true) {
+    if (checkYesNoAnswer(answer, number)) {
       console.log('Correct!');
-      const newAcc = acc + 1;
-      return iter(newAcc);
+      return iter(acc + 1);
     }
 
     return `Let's try again, ${actual}!`;
   };
-  return iter(1);
+  console.log(iter(1));
+//  return null;
 };

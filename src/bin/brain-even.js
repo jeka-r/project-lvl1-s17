@@ -1,5 +1,4 @@
 #!/usr/bin/node
-import game from '../even-logic';
+import game from '../games/even-logic';
 
-const result = game();
-console.log(result);
+game();

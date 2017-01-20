@@ -1,5 +1,4 @@
 #!/usr/bin/node
-import game from '../gcd-logic';
+import game from '../games/gcd-logic';
 
-const result = game();
-console.log(result);
+game();

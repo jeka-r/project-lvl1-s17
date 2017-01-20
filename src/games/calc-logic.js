@@ -1,6 +1,6 @@
 import readlineSync from 'readline-sync';
-import * as pairs from 'hexlet-pairs';
-import * as funcs from './functions';
+import { car, cdr } from 'hexlet-pairs';
+import { defCalcValue, askNumberAnswer, calcValue } from '../functions';
 
 export default () => {
   console.log('Welcome to the Brain Games!');
@@ -12,22 +12,20 @@ export default () => {
     if (acc >= 4) {
       return `Congratulations, ${actual}!`;
     }
-    const currentValue = funcs.defCalcValue();
-    const number1 = pairs.car(pairs.cdr(currentValue));
-    const number2 = pairs.cdr(pairs.cdr(currentValue));
-    const action = pairs.car(currentValue);
+    const currentValue = defCalcValue();
+    const number1 = car(cdr(currentValue));
+    const number2 = cdr(cdr(currentValue));
+    const action = car(currentValue);
 
     console.log(`Question: ${number1} ${action} ${number2}`);
-    const answer = funcs.getNumberAnswer();
-    const calculatedValue = funcs.calcValue(currentValue);
+    const answer = askNumberAnswer();
+    const calculatedValue = calcValue(currentValue);
 
     if (calculatedValue === answer) {
       console.log('Correct!');
-      const newAcc = acc + 1;
-      return iter(newAcc);
+      return iter(acc + 1);
     }
-
     return `Let's try again, ${actual}!`;
   };
-  return iter(1);
+  console.log(iter(1));
 };
