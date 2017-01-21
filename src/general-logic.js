@@ -1,6 +1,5 @@
 import readlineSync from 'readline-sync';
 import { car, cdr } from 'hexlet-pairs';
-import { askNumberAnswer, askYesNoAnswer } from './utils';
 
 export default (description, generation) => {
   console.log('Welcome to the Brain Games!');
@@ -17,7 +16,7 @@ export default (description, generation) => {
     const result = car(pair);
     console.log(`Question: ${question}`);
 
-    const answer = typeof result === 'string' ? askYesNoAnswer() : askNumberAnswer();
+    const answer = readlineSync.question('Your answer: ');
 
     if (result === answer) {
       console.log('Correct!');

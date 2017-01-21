@@ -1,5 +1,5 @@
 import { cons } from 'hexlet-pairs';
-import { getRandom } from '../utils';
+import getRandom from '../utils';
 import gamesProcess from '../general-logic';
 
 function calcBalanceValue(num) {
