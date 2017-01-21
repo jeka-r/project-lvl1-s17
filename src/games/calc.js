@@ -1,5 +1,5 @@
 import { cons, car, cdr } from 'hexlet-pairs';
-import getRandom from '../utils';
+import { getRandom } from '../utils';
 import gamesProcess from '../general-logic';
 
 function chooseMathOperator() {
@@ -45,17 +45,21 @@ function calcValue(data) {
   return number1 / number2;
 }
 
+function isValidAnswer(message) {
+  return !isNaN(parseFloat(message));
+}
+
+function generate() {
+  const value = getValue();
+  const number1 = car(cdr(value));
+  const number2 = cdr(cdr(value));
+  const operator = car(value);
+  const question = `${number1} ${operator} ${number2} =?`;
+  const calculatedValue = calcValue(value);
+  return cons(calculatedValue.toString(), question);
+}
+
 export default () => {
   const description = 'What is the result of the expression?';
-
-  function generation() {
-    const value = getValue();
-    const number1 = car(cdr(value));
-    const number2 = cdr(cdr(value));
-    const operator = car(value);
-    const question = `${number1} ${operator} ${number2} =?`;
-    const calculatedValue = calcValue(value);
-    return cons(calculatedValue, question);
-  }
-  console.log(gamesProcess(description, generation));
+  gamesProcess(description, generate, isValidAnswer);
 };

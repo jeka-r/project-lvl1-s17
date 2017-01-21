@@ -1,5 +1,5 @@
 import { cons } from 'hexlet-pairs';
-import getRandom from '../utils';
+import { getRandom } from '../utils';
 import gamesProcess from '../general-logic';
 
 function calcBalanceValue(num) {
@@ -17,17 +17,18 @@ function calcBalanceValue(num) {
   const result = +arraiedNum.join('');
   return calcBalanceValue(result);
 }
+function isValidAnswer(message) {
+  return !isNaN(parseFloat(message));
+}
+
+function generate() {
+  const value = getRandom(1, 5000);
+  const question = value;
+  const calculatedValue = calcBalanceValue(value);
+  return cons(calculatedValue.toString(), question);
+}
 
 export default () => {
   const description = 'Balance the given number.';
-
-  function generation() {
-    const value = getRandom(1, 5000);
-    const question = value;
-    const calculatedValue = calcBalanceValue(value);
-    const pair = cons(calculatedValue, question);
-    return pair;
-  }
-
-  console.log(gamesProcess(description, generation));
+  gamesProcess(description, generate, isValidAnswer);
 };

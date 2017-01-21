@@ -1,4 +1,4 @@
 #!/usr/bin/node
-import game from '../games/gcd-logic';
+import game from '../games/gcd';
 
 game();

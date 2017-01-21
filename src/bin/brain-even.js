@@ -1,4 +1,4 @@
 #!/usr/bin/node
-import game from '../games/even-logic';
+import game from '../games/even';
 
 game();
