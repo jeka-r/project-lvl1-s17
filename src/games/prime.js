@@ -11,7 +11,6 @@ function isPrime(num) {
   }
   const j = Math.round(Math.sqrt(num));
   for (let i = 3; i <= j; i += 2) {
-    console.log(i);
     if (num % i === 0) {
       return 'no';
     }
